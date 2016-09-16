@@ -1,0 +1,23 @@
+CREATE DATABASE tispyreviews;
+
+grant all on tispyreviews.* to 'prateek' identified by '[PASSWORD HERE]';
+grant all on tispyreviews.* to 'frontend' identified by 'frontendpassword';
+grant all on tispyreviews.* to 'api' identified by 'apipassword';
+
+
+CREATE TABLE `objects` (
+  `object_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` text NOT NULL,
+  PRIMARY KEY (`object_id`)
+)
+
+CREATE TABLE `reviews` (
+  `review_id` int(11) NOT NULL AUTO_INCREMENT,
+  `object_id` int(11) NOT NULL,
+  `review_text` text NOT NULL,
+  `image_link` text,
+  `video_link` text,
+  PRIMARY KEY (`review_id`),
+  KEY `object_id` (`object_id`),
+  CONSTRAINT `reviews_ibfk_1` FOREIGN KEY (`object_id`) REFERENCES `objects` (`object_id`)
+);
