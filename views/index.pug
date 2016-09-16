@@ -1,5 +1,20 @@
 html
   head
     title= title
+  mixin review(title)
+    .article
+      .article-wrapper
+        h1= title
+        if block
+          block
+        else
+          p No content provided
   body
     h1= message
+    a(class='button' href='/submit') SubmitAReview
+    = '\n'
+    p this is just a render test but we can use these review blocks to centeralize css and creation
+    +review('chair')
+      p Lol what
+      p did it
+      p work

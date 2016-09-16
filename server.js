@@ -30,7 +30,21 @@ app.set('view engine', 'pug');
 app.use('/og', express.static(__dirname + '/static/og.html'));
 
 app.get('/', function (req, res) {
-  res.render('index', { title: 'Hey', message: 'Hello there!'});
+    // TODO: add variable that we can iterate through to create views
+    // TODO: constant search updates so the list shrinks when typing searches
+  res.render('index', { title: 'Tipsy Reviews', message: 'Hello there!'});
+});
+
+// For reviews
+app.get('/submit', function (req, res) {
+  res.render('submission', { });
+});
+
+app.post('/submit', function (req, res) {
+  console.log(req.body.name);
+  console.log(req.body.reviewText);
+  // TODO: make this redirect to root with upcated pug variables
+  res.render('index', { title: 'Reviewed!!', message: 'So proud you were able to click submit. \n Your query was logged to console'});
 });
 
 // start app
