@@ -32,7 +32,7 @@ app.use('/og', express.static(__dirname + '/static/og.html'));
 app.get('/', function (req, res) {
     // TODO: add variable that we can iterate through to create views
     // TODO: constant search updates so the list shrinks when typing searches
-  res.render('index', { title: 'Tipsy Reviews', message: 'Penis there!'});
+  res.render('index', { title: 'Tipsy Reviews', message: 'Hi there!'});
 });
 
 // For reviews
