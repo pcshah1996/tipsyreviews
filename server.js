@@ -7,13 +7,15 @@ var favicon     = require('serve-favicon');
 var morgan      = require('morgan');
 var mysql      = require('mysql');
 
-// TODO: Create MySQL and actually correctly link it. Use db schema
 var connection = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'me',
-  password : 'secret',
-  database : 'my_db'
+    host     : 'localhost',
+    user     : 'frontend',
+    password : 'frontendpassword',
+    database : 'tipsyreviews'
 });
+
+connection.connect();
+
 
 
 // safety for user inputs
@@ -30,21 +32,35 @@ app.set('view engine', 'pug');
 app.use('/og', express.static(__dirname + '/static/og.html'));
 
 app.get('/', function (req, res) {
+    for (x = 0; x < 100; x++) {
+        connection.query('INSERT INTO objects VALUES from reviews', function(err, rows, fields) {
+            if (err) throw err;
+            console.log(rows);
+        });
+        connection.query('INSERT INTO reviews VALUES from reviews', function(err, rows, fields) {
+            if (err) throw err;
+            console.log(rows);
+        });
+    }
+    connection.query('SELECT * from reviews', function(err, rows, fields) {
+        if (err) throw err;
+        console.log('Select: ', rows);
+    });
     // TODO: add variable that we can iterate through to create views
     // TODO: constant search updates so the list shrinks when typing searches
-  res.render('index', { title: 'Tipsy Reviews', message: 'Hi there!'});
+    res.render('index', { title: 'Tipsy Reviews', message: 'Hi there!'});
 });
 
 // For reviews
 app.get('/submit', function (req, res) {
-  res.render('submission', { });
+    res.render('submission', { });
 });
 
 app.post('/submit', function (req, res) {
-  console.log(req.body.name);
-  console.log(req.body.reviewText);
-  // TODO: make this redirect to root with upcated pug variables
-  res.render('index', { title: 'Reviewed!!', message: 'So proud you were able to click submit. \n Your query was logged to console'});
+    console.log(req.body.name);
+    console.log(req.body.reviewText);
+    // TODO: make this redirect to root with upcated pug variables
+    res.render('index', { title: 'Reviewed!!', message: 'So proud you were able to click submit. \n Your query was logged to console'});
 });
 
 // start app
