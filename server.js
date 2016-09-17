@@ -39,12 +39,11 @@ app.get('/', function (req, res) {
 
 app.get('/populate1/:num', function(req, res) {
     for (x = 0; x < req.params.id; x++) {
-        connection.query('INSERT INTO objects VALUES ...', function(err, rows, fields) {
+        connection.query('INSERT INTO objects (name) VALUES (?)', [x], function(err, rows, fields) {
             if (err) throw err;
             console.log(rows);
         });
     }
-    res.send("Thanks");
 
 });
 
@@ -55,7 +54,6 @@ app.get('/populate2/:num', function(req, res) {
             console.log(rows);
         });
     }
-    res.send("Thanks");
 
 });
 app.get('/view', function(req, res) {
