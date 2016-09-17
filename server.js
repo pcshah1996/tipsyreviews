@@ -39,7 +39,10 @@ app.get('/', function (req, res) {
 
 app.get('/populate1/:num', function(req, res) {
     for (x = 0; x < req.params.id; x++) {
+        console.log("woo")
         connection.query('INSERT INTO objects (name) VALUES (?)', [x], function(err, rows, fields) {
+            console.log("woo1")
+
             if (err) throw err;
             console.log(rows);
         });
