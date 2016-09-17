@@ -44,6 +44,8 @@ app.get('/populate1/:num', function(req, res) {
             console.log(rows);
         });
     }
+    res.send("Thanks");
+
 });
 
 app.get('/populate2/:num', function(req, res) {
@@ -53,18 +55,17 @@ app.get('/populate2/:num', function(req, res) {
             console.log(rows);
         });
     }
+    res.send("Thanks");
+
 });
 app.get('/view', function(req, res) {
     connection.query('SELECT * from reviews', function(err, rows, fields) {
         if (err) throw err;
         console.log('Select: ', rows);
     });
+    res.send("Thanks");
 });
 
-connection.query('SELECT * from reviews', function(err, rows, fields) {
-    if (err) throw err;
-    console.log('Select: ', rows);
-});
 // For reviews
 app.get('/submit', function (req, res) {
     res.render('submission', { });
